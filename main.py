@@ -171,6 +171,18 @@ while running:
                 playerx_change = -12.0
             if (event.key == pygame.K_RIGHT):
                 playerx_change = 12.0
+            if (event.key == pygame.K_RETURN and itsover == True):
+                itsover = False
+                enemy_speed_x = 1.0  # Velocidad inicial de los enemigos
+                enemy_speed_y = 1.0  # Velocidad inicial de los enemigos
+                score_value = 0
+                for i in range(number_of_enemies):
+                    enemyx[i] = random.randint(0, 736)
+                    enemyy[i] = random.randint(0, 150)
+                    enemy_bullet_state[i] = "ready"
+                    enemy_bulletx[i] = 0
+                    enemy_bullety[i] = 0
+                    enemy_bulletx_change[i] = 0
 
             if (event.key == pygame.K_SPACE):
                 if bullet_state == "ready":
@@ -196,8 +208,6 @@ while running:
 
     if not itsover:
         for i in range(number_of_enemies):
-
-
             # game over
             if enemyy[i] > 470:
                 for j in range(number_of_enemies):
@@ -214,7 +224,7 @@ while running:
                 enemyy[i] += enemyy_change[i] * enemy_speed_y
 
             # Comprueba si el enemigo está listo para disparar, y un número aleatorio cumple con la condición
-            if enemy_bullet_state[i] == "ready" and random.randint(1, 100) == 1:
+            if enemy_bullet_state[i] == "ready" and random.randint(1, 200) == 1:
                 values_random = [-2, 0, 2]
                 enemy_bulletx[i] = enemyx[i] + 32
                 enemy_bullety[i] = enemyy[i] + 32
